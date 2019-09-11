@@ -83,6 +83,9 @@ body {
     align-items: center;
 }
 
+/*---------------------*/
+/* .score_div */
+
 .score_div {
     /*border: 1px solid cyan;*/
     width: 85%;
@@ -112,6 +115,9 @@ body {
     font-size: 2em;
 }
 
+/*---------------------*/
+/* .solution_div */
+
 .solution_div {
     /*border: 1px solid cyan;*/
     width: 85%;
@@ -135,6 +141,9 @@ body {
     height: 88%;
     width: 100%;
 }
+
+/*---------------------*/
+/* .newend_div */
 
 .newend_div {
     /*border: 1px solid cyan;*/
@@ -216,6 +225,9 @@ body {
     flex-direction: column;
 }
 
+/*---------------------*/
+/* .line1-6_box */
+
 .line1_box {
     /*border: 1px solid yellow;*/
     width: 100%;
@@ -269,6 +281,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/*---------------------*/
+/* .line1-6 */
 
 .line1 {
     border: 1px solid sandybrown;
@@ -356,8 +371,21 @@ body {
     /*border: 1px solid hotpink;*/
     text-align: center;
     height: 3%;
+    margin-top: 1%;
+}
 
-color: ye
+.winner {
+    font-size: 1.5em;
+}
+
+.winner:first-letter {
+    font-size: 2em;
+}
+
+#prv-billboard {
+        margin-top: 10%;
+        padding-top: 10%;
+        display: inline-block;
 }
 
 /*-------------------------------------------*/
@@ -374,6 +402,11 @@ color: ye
     .game_div {
         width: 465px;
         height: 465px;
+    }
+
+    .solution_img {
+        width: 70%;
+        height: 100%;
     }
 }
 
@@ -429,19 +462,45 @@ color: ye
         width: 350px;
         height: 350px;
     }
+
+    .solution_img {
+        width: 75%;
+        height: 85%;
+    }
 }
 
 /*##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px */
 @media (min-width: 320px) and (max-width: 480px) {
     #container {
-        width: 270px;
+        width: 315px;
         height: 637px;
         font-size: 0.5em;
+    }
+
+    #game {
+        height: 50%;
     }
 
     .game_div {
         width: 265px;
         height: 265px;
+    }
+
+    .solution_img {
+        width: 75%;
+        height: 75%;
+    }
+
+    #footer_end {
+        margin-top: -1%;
+    }
+
+    .winner {
+        font-size: 1.2em;
+    }
+
+    .winner:first-letter {
+        font-size: 1.7em;
     }
 }

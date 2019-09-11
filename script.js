@@ -1,11 +1,23 @@
 window.onload = start;
 
-var line1_class = document.getElementsByClassName("line1");
+// zmienne class linii z kulkami
 var line2_class = document.getElementsByClassName("line2");
 var line3_class = document.getElementsByClassName("line3");
 var line4_class = document.getElementsByClassName("line4");
 var line5_class = document.getElementsByClassName("line5");
-var line6_class = document.getElementsByClassName("line6");
+
+// var dzwiek audio
+var click_audio = new Audio("sounds/click.wav");
+var win_audio = new Audio("sounds/win.wav");
+
+// var wynik
+var score = 0;
+
+// var first_click = time start
+var first_click = 0;
+
+//
+var time_start = new Date().getTime();
 
 //! FUNCTION start()
 function start() {
@@ -140,12 +152,32 @@ function start() {
 
 } // end start()
 
-//! FUNCTION click_arrow()
+//! FUNCTION click_arrow(line_num, arrow_num, arrow_way) - (numer linii, numer strzalki, kierunek strzalki)
 function click_arrow(line_num, arrow_num, arrow_way) {
-    console.log("@@@@clickarrow()@@@@");
-    console.log("line_num:", line_num);
-    console.log("arrow_num:", arrow_num);
-    console.log("arrow_way:", arrow_way);
+
+    // klasa wyniku
+    var scoreresult_class = document.getElementsByClassName("score_result");
+
+    //TODO play audio if click
+    click_audio.load();
+    click_audio.play();
+
+    // var czas start
+    if (first_click===0) {
+        time_start = new Date().getTime();
+        first_click++;
+    }
+
+
+    //TODO po kliknieciu dodaj score++ i wypisuje wynik
+    score++;
+    //* if dodaje zera do score zeby zawsze byly wyswietlone 4 cyfry
+    if(score<10) scoreresult_class[0].innerHTML = '000'+score;
+    else if(score<100 && score>=10) scoreresult_class[0].innerHTML = '00'+score;
+    else if(score<1000 && score>=100) scoreresult_class[0].innerHTML = '0'+score;
+    else if(score<10000 && score>=1000) scoreresult_class[0].innerHTML = score;
+    else if(score>=10000) scoreresult_class[0].innerHTML = "Aż takie trudne?:)";
+
 
     //TODO UP arrow
     //* if click 1st UP arrow
@@ -156,6 +188,8 @@ function click_arrow(line_num, arrow_num, arrow_way) {
         let line3_box = line3_class[1].firstChild.getAttribute("src");
         let line4_box = line4_class[1].firstChild.getAttribute("src");
         let line5_box = line5_class[1].firstChild.getAttribute("src");
+
+
 
         //TODO dodaj strzalki (line$_box = <img/$.png">)
         line2_box = '<' + line2_box + '">';
@@ -1072,7 +1106,21 @@ function check_result() {
         (line4_class[4].firstChild.getAttribute("src") === 'img/4.png') &&
         (line5_class[4].firstChild.getAttribute("src") === 'img/4.png')
     ) {
-        document.getElementById("game").innerHTML = "GRATULACJE! ZJEDZ KOLACJE";
+
+        // zmienne czasu
+        var time_end = new Date().getTime();
+        var time_dist = time_end - time_start;
+        var minutes = Math.floor((time_dist % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((time_dist % (1000 * 60)) / 1000);
+
+        if(seconds<10) seconds = "0"+seconds;
+
+        //TODO play audio if click
+        win_audio.load();
+        win_audio.play();
+
+
+        document.getElementById("game").innerHTML = '<p class="winner">GRATULACJE! Udało Ci się! Twoja ilość kliknięć to <span style="color:green">'+score+'</span>. Twój czas to  <span style="color:green">'+minutes+','+seconds+'</span>min.</p>';
         console.log("WYGRALES!");
 
         return true;
@@ -1082,4 +1130,5 @@ function check_result() {
 
         return false;
     }
+
 } // end check_result()
